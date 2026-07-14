@@ -159,19 +159,13 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div 
             onClick={() => setScreen('home')}
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center cursor-pointer group select-none"
           >
-            <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary-700/35 group-hover:scale-105 transition-all">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <span className="font-extrabold text-slate-100 text-base block tracking-tight">
-                {t('title')}
-              </span>
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block -mt-0.5">
-                Business Intelligence
-              </span>
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="BizLens AI Logo" 
+              className="h-10 w-auto object-contain group-hover:scale-[1.02] transition-all"
+            />
           </div>
           
           <div className="flex items-center gap-4">

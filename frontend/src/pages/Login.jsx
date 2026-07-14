@@ -37,18 +37,12 @@ export default function Login({ onLoginSuccess, onToggleRegister }) {
       <div className="w-full max-w-md">
         <Tilt3DCard className="bg-surface border border-outline-variant/65 rounded-3xl p-6 md:p-8 shadow-2xl glass-panel relative overflow-hidden">
           {/* Top Brand Marker */}
-          <div className="flex flex-col items-center text-center space-y-3 mb-8">
-            <div className="w-12 h-12 bg-primary-700 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-primary-700/35">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="font-extrabold text-slate-100 text-2xl tracking-tight">
-                BizLens AI
-              </h1>
-              <p className="text-xs text-slate-400 mt-1.5">
-                Smart Business Intelligence Assistant
-              </p>
-            </div>
+          <div className="flex flex-col items-center text-center mb-8">
+            <img 
+              src="/logo.png" 
+              alt="BizLens AI Logo" 
+              className="h-16 w-auto object-contain select-none"
+            />
           </div>
 
           {error && (
