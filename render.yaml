@@ -6,10 +6,6 @@ services:
     buildCommand: "pip install -r requirements.txt || pip install -r backend/requirements.txt"
     startCommand: "python -m uvicorn main:app --host 0.0.0.0 --port $PORT || python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
     plan: free
-    disk:
-      name: bizlens-db-disk
-      mountPath: /data
-      sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
