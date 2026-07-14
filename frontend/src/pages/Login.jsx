@@ -41,7 +41,7 @@ export default function Login({ onLoginSuccess, onToggleRegister }) {
             <img 
               src="/logo.png" 
               alt="BizLens AI Logo" 
-              className="h-16 w-auto object-contain select-none"
+              className="h-28 w-auto object-contain select-none"
             />
           </div>
 

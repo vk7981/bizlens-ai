@@ -164,7 +164,7 @@ export default function App() {
             <img 
               src="/logo.png" 
               alt="BizLens AI Logo" 
-              className="h-10 w-auto object-contain group-hover:scale-[1.02] transition-all"
+              className="h-14 w-auto object-contain group-hover:scale-[1.02] transition-all"
             />
           </div>
           
