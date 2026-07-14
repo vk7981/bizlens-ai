@@ -15,6 +15,6 @@ services:
       - key: GMAIL_APP_PASSWORD
         sync: false
       - key: DATABASE_URL
-        value: sqlite:////data/bizlens.db
+        value: sqlite:///./bizlens.db
       - key: UPLOAD_DIR
-        value: /data/uploads
+        value: ./uploads
