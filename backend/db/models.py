@@ -43,3 +43,12 @@ class ChatMessage(Base):
     content = Column(Text, nullable=False)
     detected_language = Column(String(10), default="en")
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+
+class User(Base):
+    __tablename__ = "users"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    email = Column(String(200), unique=True, nullable=False, index=True)
+    password_hash = Column(String(500), nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
