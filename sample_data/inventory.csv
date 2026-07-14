@@ -1,0 +1,21 @@
+product_name,category,current_stock,reorder_level,last_restocked
+Smartphone,Electronics,4,19,2026-06-14
+Laptop,Electronics,3,27,2026-07-03
+Bluetooth Speaker,Electronics,48,29,2026-06-21
+Smart Watch,Electronics,30,12,2026-06-09
+Power Bank,Electronics,57,13,2026-06-23
+Cotton T-Shirt,Apparel,8,10,2026-05-16
+Denim Jeans,Apparel,43,13,2026-05-26
+Running Shoes,Apparel,4,24,2026-05-28
+Leather Jacket,Apparel,51,14,2026-06-17
+Socks Pack,Apparel,56,16,2026-06-15
+Air Fryer,Home & Kitchen,21,22,2026-06-04
+Blender,Home & Kitchen,70,23,2026-06-17
+Coffee Mug,Home & Kitchen,10,20,2026-06-03
+Non-Stick Pan,Home & Kitchen,75,28,2026-06-03
+Bed Sheets,Home & Kitchen,9,20,2026-05-27
+Coding AI Agents,Books,5,24,2026-07-04
+Business Strategy,Books,69,28,2026-06-14
+Financial Freedom,Books,79,30,2026-06-22
+Storybook,Books,32,11,2026-06-07
+Cooking Guide,Books,72,27,2026-06-25

@@ -1,0 +1,35 @@
+# Environment files
+.env
+backend/.env
+frontend/.env
+
+# Databases
+*.db
+backend/bizlens.db
+
+# Caches & python environment files
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+env/
+venv/
+ENV/
+
+# Dependency directories
+node_modules/
+frontend/node_modules/
+
+# Production build outputs
+dist/
+frontend/dist/
+build/
+
+# Logs & temp testing files
+*.log
+backend/chat_test_output.txt
+backend/.ethereal_account.json
+backend/uploads/
+uploads/
+.tempmediaStorage/
+*.txt

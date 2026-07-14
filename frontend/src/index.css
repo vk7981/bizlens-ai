@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-slate-200 antialiased font-sans;
+    background-color: #080B11;
+    color: #EEF2F6;
+  }
+}
+
+/* Premium 3D Scroll and Radial Glow Animations */
+.glass-panel {
+  background: rgba(15, 19, 30, 0.75);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Custom animated background grid */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.02) 1px, transparent 1px);
+}
+
+/* Ambient Radial Glows */
+.radial-glow-indigo {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+}
+
+.radial-glow-orange {
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.05) 0%, transparent 70%);
+}
+
+/* 3D Parallax Scroll Shift */
+.scroll-3d-element {
+  transform: translateY(var(--scroll-y, 0px)) rotateX(var(--scroll-rot-x, 0deg)) rotateY(var(--scroll-rot-y, 0deg)) scale(var(--scroll-scale, 1));
+  transition: transform 0.2s cubic-bezier(0.1, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080B11;
+}
+::-webkit-scrollbar-thumb {
+  background: #151C2C;
+  border-radius: 4px;
+  border: 2px solid #080B11;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6366F1;
+}
