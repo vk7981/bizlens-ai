@@ -32,4 +32,3 @@ backend/.ethereal_account.json
 backend/uploads/
 uploads/
 .tempmediaStorage/
-*.txt
