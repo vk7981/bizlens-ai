@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from backend.db.models import Base
 
 # Central database for storing metadata, chat history, alerts, etc.
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./bizlens.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./kestrel.db")
 
 engine = create_engine(
     DATABASE_URL, 

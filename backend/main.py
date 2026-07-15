@@ -14,7 +14,7 @@ from backend.db.session import init_db
 from backend.routers import upload, agent, chat, alerts, history, auth
 
 app = FastAPI(
-    title="BizLens AI Backend",
+    title="Kestrel AI Backend",
     description="Multilingual agentic business intelligence backend supporting Excel/CSV sandboxing, cross-file pattern joins, and SMTP alerts.",
     version="1.0.0"
 )
@@ -39,8 +39,8 @@ app.include_router(auth.router)
 def startup_event():
     # Make sure central database metadata is created
     init_db()
-    print("BizLens central SQLite metadata database initialized.")
+    print("Kestrel central SQLite database initialized.")
 
 @app.get("/")
 def read_root():
-    return {"status": "ONLINE", "service": "BizLens AI BI Engine"}
+    return {"status": "ONLINE", "service": "Kestrel AI BI Engine"}

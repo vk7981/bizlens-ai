@@ -44,7 +44,7 @@ export default function AgentProgressBar({ progress, logs, queriesCount, insight
             <span className="w-3 h-3 rounded-full bg-red-500" />
             <span className="w-3 h-3 rounded-full bg-yellow-500" />
             <span className="w-3 h-3 rounded-full bg-green-500" />
-            <span className="text-[10px] font-mono text-slate-500 ml-2">BizLens AI Detective Agent</span>
+            <span className="text-[10px] font-mono text-slate-500 ml-2">Kestrel AI Detective Agent</span>
           </div>
           <div className="flex gap-4 font-mono text-[9px] text-slate-400">
             <span>QUERIES: <strong className="text-slate-200">{queriesCount}</strong></span>
