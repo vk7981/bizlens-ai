@@ -62,7 +62,7 @@ async def chat_with_data(
     if not api_key:
         raise HTTPException(status_code=500, detail="Gemini key not configured.")
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-flash-lite-latest")
+    model = genai.GenerativeModel("gemini-1.5-flash")
     
     sql_prompt = f"""
     You are a SQL translator. Translate this business owner question into a single read-only SQLite SELECT query.
@@ -83,10 +83,15 @@ async def chat_with_data(
     query_result_data = None
     query_used = ""
     
+    loop = asyncio.get_event_loop()
+    
     try:
-        response = model.generate_content(
-            sql_prompt,
-            generation_config={"response_mime_type": "application/json"}
+        response = await loop.run_in_executor(
+            None,
+            lambda: model.generate_content(
+                sql_prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
         )
         text = response.text.strip()
         if text.startswith("```json"):
@@ -154,9 +159,13 @@ async def chat_with_data(
         User's New Question: {message_text}
         """
         
-        ans_res = model.generate_content(chat_prompt)
+        ans_res = await loop.run_in_executor(
+            None,
+            lambda: model.generate_content(chat_prompt)
+        )
         answer = ans_res.text.strip()
     except Exception as e:
+        print("Chat response formulation failed:", str(e))
         # Simple fallback message
         fallbacks = {
             "en": "I experienced a connection issue. Can you please repeat that?",

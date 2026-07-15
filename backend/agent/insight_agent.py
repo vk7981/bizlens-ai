@@ -19,7 +19,7 @@ class InsightAgent:
         if not api_key:
             raise ValueError("Missing GEMINI_API_KEY environment variable.")
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel("gemini-flash-lite-latest")
+        self.model = genai.GenerativeModel("gemini-1.5-flash")
 
     def _event(self, event_type: str, data: dict) -> dict:
         return {"type": event_type, **data}
