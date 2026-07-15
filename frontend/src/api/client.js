@@ -74,4 +74,28 @@ export const resetPassword = (email, otp, newPassword) => {
   return client.post('/api/auth/reset-password', { email, otp, new_password: newPassword });
 };
 
+export const getLedger = (email) => {
+  return client.get('/api/ledger', { params: { email } });
+};
+
+export const saveLedgerEntry = (email, date, income, expenses, notes) => {
+  return client.post('/api/ledger', { email, date, income, expenses, notes });
+};
+
+export const deleteLedgerEntry = (id) => {
+  return client.delete(`/api/ledger/${id}`);
+};
+
+export const autoExtractLedger = (sessionId, email) => {
+  return client.post('/api/ledger/auto-extract', { session_id: sessionId, email });
+};
+
+export const getSessionSchema = (sessionId) => {
+  return client.get(`/api/ledger/schema/${sessionId}`);
+};
+
+export const executeSessionQuery = (sessionId, query) => {
+  return client.post(`/api/ledger/query/${sessionId}`, { query });
+};
+
 export default client;

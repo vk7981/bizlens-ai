@@ -11,7 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 from backend.db.session import init_db
-from backend.routers import upload, agent, chat, alerts, history, auth
+from backend.routers import upload, agent, chat, alerts, history, auth, ledger
 
 app = FastAPI(
     title="VantageBI Backend",
@@ -34,6 +34,7 @@ app.include_router(chat.router)
 app.include_router(alerts.router)
 app.include_router(history.router)
 app.include_router(auth.router)
+app.include_router(ledger.router)
 
 @app.on_event("startup")
 def startup_event():

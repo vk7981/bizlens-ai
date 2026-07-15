@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import Column, String, Integer, DateTime, Boolean, Text, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, Boolean, Text, ForeignKey, Float
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -51,4 +51,17 @@ class User(Base):
     name = Column(String(100), nullable=False)
     email = Column(String(200), unique=True, nullable=False, index=True)
     password_hash = Column(String(500), nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+class DailyLedger(Base):
+    __tablename__ = "daily_ledger"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String(200), nullable=False, index=True)
+    date = Column(String(50), nullable=False) # "YYYY-MM-DD" or "YYYY-MM"
+    income = Column(Float, default=0.0)
+    expenses = Column(Float, default=0.0)
+    profit = Column(Float, default=0.0)
+    notes = Column(Text, nullable=True)
+    source = Column(String(50), default="MANUAL") # MANUAL, AUTO_FILE
     created_at = Column(DateTime, default=datetime.datetime.utcnow)

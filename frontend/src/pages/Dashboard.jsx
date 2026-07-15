@@ -3,7 +3,9 @@ import { getReport, sendReportEmail } from '../api/client';
 import InsightCard from '../components/InsightCard';
 import AlertBanner from '../components/AlertBanner';
 import Tilt3DCard from '../components/Tilt3DCard';
-import { ArrowLeft, Mail, CheckCircle2, ShieldCheck, Sparkles, MessageCircle, AlertCircle, Settings, X } from 'lucide-react';
+import { ArrowLeft, Mail, CheckCircle2, ShieldCheck, Sparkles, MessageCircle, AlertCircle, Settings, X, Calendar, BarChart3 } from 'lucide-react';
+import ProfitCalendar from '../components/ProfitCalendar';
+import AdvancedVisualizations from '../components/AdvancedVisualizations';
 
 export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpenSettings, t, userEmail }) {
   const [report, setReport] = useState(null);
@@ -13,6 +15,7 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
   const [sendingEmail, setSendingEmail] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [etherealInfo, setEtherealInfo] = useState(null);
+  const [activeTab, setActiveTab] = useState('insights'); // 'insights' | 'calendar' | 'charts'
 
   useEffect(() => {
     if (sessionId) {
@@ -209,48 +212,91 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
         </Tilt3DCard>
       </section>
 
-      {/* Alerts Banner */}
-      <AlertBanner alerts={alerts} t={t} />
+      {/* Navigation Tabs */}
+      <div className="flex border-b border-outline-variant/30 gap-6 pb-0.5">
+        <button
+          onClick={() => setActiveTab('insights')}
+          className={`pb-3 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all border-b-2 cursor-pointer ${
+            activeTab === 'insights'
+              ? 'border-indigo-500 text-indigo-400 font-extrabold'
+              : 'border-transparent text-slate-450 hover:text-slate-300'
+          }`}
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>AI Insights</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('calendar')}
+          className={`pb-3 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all border-b-2 cursor-pointer ${
+            activeTab === 'calendar'
+              ? 'border-indigo-500 text-indigo-400 font-extrabold'
+              : 'border-transparent text-slate-450 hover:text-slate-300'
+          }`}
+        >
+          <Calendar className="w-4 h-4" />
+          <span>Profit Calendar & Ledger</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('charts')}
+          className={`pb-3 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all border-b-2 cursor-pointer ${
+            activeTab === 'charts'
+              ? 'border-indigo-500 text-indigo-400 font-extrabold'
+              : 'border-transparent text-slate-450 hover:text-slate-300'
+          }`}
+        >
+          <BarChart3 className="w-4 h-4" />
+          <span>Interactive Charts</span>
+        </button>
+      </div>
 
-      {/* Insights Section */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-        {/* Left Side: Insight Cards with 3D tilting scroll animation wrapper */}
-        <div className="md:col-span-7 space-y-5">
-          <h3 className="font-extrabold text-slate-100 text-lg flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-indigo-400" />
-            {t('insightHeader')}
-          </h3>
-          <div className="space-y-4">
-            {insights.map((ins, idx) => (
-              <div key={idx}>
-                <Tilt3DCard>
-                  <InsightCard insight={ins} t={t} />
-                </Tilt3DCard>
+      {activeTab === 'insights' && (
+        <div className="space-y-6">
+          <AlertBanner alerts={alerts} t={t} />
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <div className="md:col-span-7 space-y-5">
+              <h3 className="font-extrabold text-slate-100 text-lg flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-indigo-400" />
+                {t('insightHeader')}
+              </h3>
+              <div className="space-y-4">
+                {insights.map((ins, idx) => (
+                  <div key={idx}>
+                    <Tilt3DCard>
+                      <InsightCard insight={ins} t={t} />
+                    </Tilt3DCard>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="md:col-span-5 space-y-5">
+              <h3 className="font-extrabold text-slate-100 text-lg flex items-center gap-2">
+                <MessageCircle className="w-5 h-5 text-indigo-400" />
+                {t('chatTitle')}
+              </h3>
+              <Tilt3DCard className="bg-surface/50 border border-outline-variant/65 rounded-2xl p-5 shadow-lg space-y-4">
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Have questions about Chennai customer counts, top category spend, or specific sales peaks? Ask the virtual assistant in English, Tamil, or Hindi.
+                </p>
+                <button
+                  onClick={onOpenChat}
+                  className="w-full py-3 bg-slate-950/65 hover:bg-slate-900 border border-slate-900 hover:border-slate-800 text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <MessageCircle className="w-4 h-4 text-indigo-400" />
+                  <span>Ask a question</span>
+                </button>
+              </Tilt3DCard>
+            </div>
           </div>
         </div>
+      )}
 
-        {/* Right Side: Quick Ask/Chat widget with 3D scrolling container */}
-        <div className="md:col-span-5 space-y-5">
-          <h3 className="font-extrabold text-slate-100 text-lg flex items-center gap-2">
-            <MessageCircle className="w-5 h-5 text-indigo-400" />
-            {t('chatTitle')}
-          </h3>
-          <Tilt3DCard className="bg-surface/50 border border-outline-variant/65 rounded-2xl p-5 shadow-lg space-y-4">
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Have questions about Chennai customer counts, top category spend, or specific sales peaks? Ask the virtual assistant in English, Tamil, or Hindi.
-            </p>
-            <button
-              onClick={onOpenChat}
-              className="w-full py-3 bg-slate-950/65 hover:bg-slate-900 border border-slate-900 hover:border-slate-800 text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <MessageCircle className="w-4 h-4 text-indigo-400" />
-              <span>Ask a question</span>
-            </button>
-          </Tilt3DCard>
-        </div>
-      </div>
+      {activeTab === 'calendar' && (
+        <ProfitCalendar sessionId={sessionId} userEmail={userEmail} />
+      )}
+
+      {activeTab === 'charts' && (
+        <AdvancedVisualizations sessionId={sessionId} userEmail={userEmail} />
+      )}
     </div>
   );
 }

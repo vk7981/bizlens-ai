@@ -192,3 +192,39 @@ async def chat_with_data(
         "response": answer,
         "language": detected_lang
     }
+
+class TrendExplainRequest(BaseModel):
+    session_id: str
+    table_name: str
+    x_col: str
+    y_col: str
+    data_summary: list
+
+@router.post("/explain-trend")
+async def explain_trend(payload: TrendExplainRequest):
+    """Generates a plain-language AI business explanation of visual chart trends."""
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        return {"explanation": "Gemini key not configured. Visual data is plotted successfully."}
+        
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("gemini-2.0-flash")
+    
+    prompt = f"""
+    You are a business intelligence assistant.
+    Review this chart dataset derived from table '{payload.table_name}' plotting '{payload.y_col}' (Y-axis) against '{payload.x_col}' (X-axis):
+    {json.dumps(payload.data_summary, indent=2)}
+    
+    Summarize the primary business trend, peak values, lowest values, and any key anomalies in exactly 2 clear, friendly sentences.
+    Focus on business insights (sales drops, peak costs, customer groupings) without technical jargon.
+    """
+    
+    try:
+        response = await asyncio.wait_for(
+            model.generate_content_async(prompt),
+            timeout=4.0
+        )
+        return {"explanation": response.text.strip()}
+    except Exception as e:
+        print("AI Trend explanation failed:", str(e))
+        return {"explanation": "Unable to connect to AI for trend explanation. Visual data is plotted successfully."}
