@@ -9,6 +9,7 @@ from backend.db.models import SessionMetadata, ChatMessage, InsightReport, Alert
 from backend.services.language_service import detect_language, get_multilingual_chat_prompt
 from backend.utils.schema_reader import get_database_schema
 from backend.utils.sql_runner import execute_select_query
+from pydantic import BaseModel
 
 router = APIRouter(prefix="/api/chat", tags=["Chat"])
 
