@@ -62,4 +62,16 @@ export const registerUser = (name, email, password) => {
   return client.post('/api/auth/register', { name, email, password });
 };
 
+export const forgotPassword = (email) => {
+  return client.post('/api/auth/forgot-password', { email });
+};
+
+export const verifyOtp = (email, otp) => {
+  return client.post('/api/auth/verify-otp', { email, otp });
+};
+
+export const resetPassword = (email, otp, newPassword) => {
+  return client.post('/api/auth/reset-password', { email, otp, new_password: newPassword });
+};
+
 export default client;

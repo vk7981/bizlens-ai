@@ -196,3 +196,70 @@ def send_full_report_email(recipient_email: str, report_data: dict, db_name: str
     except Exception as e:
         print(f"Failed to send report email via SMTP ({sender_type}): {str(e)}")
         return {"success": False, "error": str(e)}
+
+def send_otp_email(recipient_email: str, otp: str) -> dict:
+    """
+    Sends a One-Time Password (OTP) for password reset.
+    Falls back to Ethereal sandbox SMTP if Gmail credentials are not configured.
+    """
+    sender, password, server, port = get_smtp_config()
+    sender_type = "gmail"
+    ethereal_user = None
+    ethereal_pass = None
+
+    if not sender or not password:
+        # Try Ethereal fallback
+        ethereal = get_or_create_ethereal_account()
+        if ethereal:
+            sender = ethereal["user"]
+            password = ethereal["pass"]
+            server = ethereal["host"]
+            port = ethereal["port"]
+            sender_type = "ethereal"
+            ethereal_user = sender
+            ethereal_pass = password
+        else:
+            # Complete fallback print
+            print("\n" + "="*50)
+            print(f"SMTP WARNING: Ethereal and Gmail credentials unavailable. Logging to console.")
+            print(f"PASSWORD RESET OTP FOR: {recipient_email}")
+            print(f"OTP Code: {otp}")
+            print("="*50 + "\n")
+            return {"success": True, "sender_type": "mock"}
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = f"VantageBI — Password Reset OTP"
+    msg["From"] = sender
+    msg["To"] = recipient_email
+
+    body_html = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif; background-color: #0f172a; color: #f1f5f9; padding: 20px; text-align: center;">
+        <div style="max-width: 400px; margin: 0 auto; background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 30px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
+            <h2 style="color: #6366f1; margin-bottom: 20px;">VantageBI</h2>
+            <p style="font-size: 14px; color: #94a3b8; line-height: 1.5;">You requested to reset your password. Use the verification code below to set a new password:</p>
+            <div style="font-size: 32px; font-weight: bold; color: #38bdf8; background-color: #0f172a; padding: 15px; margin: 25px 0; border-radius: 8px; letter-spacing: 4px; border: 1px dashed #0284c7;">
+                {otp}
+            </div>
+            <p style="font-size: 11px; color: #64748b; margin-top: 20px;">This code is valid for 10 minutes. If you did not request this, please ignore this email.</p>
+        </div>
+    </body>
+    </html>
+    """
+    msg.attach(MIMEText(body_html, "html"))
+
+    try:
+        with smtplib.SMTP(server, port) as smtp:
+            smtp.starttls()
+            smtp.login(sender, password)
+            smtp.sendmail(sender, recipient_email, msg.as_string())
+        print(f"Password reset OTP sent via {sender_type} to {recipient_email}")
+        return {
+            "success": True, 
+            "sender_type": sender_type, 
+            "ethereal_user": ethereal_user, 
+            "ethereal_pass": ethereal_pass
+        }
+    except Exception as e:
+        print(f"Failed to send OTP email via SMTP ({sender_type}): {str(e)}")
+        return {"success": False, "error": str(e)}
