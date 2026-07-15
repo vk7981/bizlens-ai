@@ -102,7 +102,7 @@ def stream_agent_run(session_id: str):
                 yield {"data": json.dumps({"type": "error", "message": str(e)})}
                 break
                 
-    return EventSourceResponse(event_generator())
+    return EventSourceResponse(event_generator(), headers={"X-Accel-Buffering": "no"})
 
 @router.get("/report/{session_id}")
 def get_report(session_id: str, db: Session = Depends(get_db)):
