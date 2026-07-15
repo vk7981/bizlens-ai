@@ -82,7 +82,8 @@ class InsightAgent:
                 None, 
                 lambda: self.model.generate_content(
                     planner_prompt, 
-                    generation_config={"response_mime_type": "application/json"}
+                    generation_config={"response_mime_type": "application/json"},
+                    request_options={"timeout": 10.0}
                 )
             )
             text = response.text.strip()
@@ -129,6 +130,7 @@ class InsightAgent:
             iteration = 0
             max_iterations = 2
             while iteration < max_iterations:
+                await asyncio.sleep(1.0)
                 iteration += 1
                 yield self._event("log", {
                     "sender": "agent", 
@@ -163,7 +165,8 @@ class InsightAgent:
                         None, 
                         lambda: self.model.generate_content(
                             sql_prompt, 
-                            generation_config={"response_mime_type": "application/json"}
+                            generation_config={"response_mime_type": "application/json"},
+                            request_options={"timeout": 10.0}
                         )
                     )
                     text = response.text.strip()
@@ -215,7 +218,7 @@ class InsightAgent:
                 
                 Identify if there is any critical anomaly, sudden drop, spike, or interesting trend that has a direct business impact.
                 - Write a plain language headline (title) of the finding.
-                - Write a detailed plain language explanation of the finding.
+                - Write a detailed plain language explanation of the finding. Keep the explanation concise and under 2 sentences to ensure fast processing.
                 - Keep the tone helpful, non-technical, and commercial.
                 
                 Output the finding as a JSON object matching this format:
@@ -233,7 +236,8 @@ class InsightAgent:
                         None, 
                         lambda: self.model.generate_content(
                             analysis_prompt, 
-                            generation_config={"response_mime_type": "application/json"}
+                            generation_config={"response_mime_type": "application/json"},
+                            request_options={"timeout": 10.0}
                         )
                     )
                     text = response.text.strip()
@@ -283,6 +287,7 @@ class InsightAgent:
         cross_connections = find_cross_file_connections(schema)
         
         for conn_idx, conn in enumerate(cross_connections, 1):
+            await asyncio.sleep(1.0)
             yield self._event("log", {
                 "sender": "agent", 
                 "message": f"🔗 Cross-File Link Found: '{conn['title']}'\n↳ Action: {conn['description']}"
@@ -313,7 +318,7 @@ class InsightAgent:
             
             Formulate a high-impact business pattern finding that links these different parts of the business (e.g. expenses vs sales trend, low stock vs sales velocity).
             - Headline (title): A clear business-oriented headline
-            - Description (finding): A detailed explanation of the correlation in simple, friendly terms
+            - Description (finding): A detailed explanation of the correlation in simple, friendly terms. Keep the finding concise and under 2 sentences to ensure fast processing.
             
             Output as JSON:
             {{
@@ -327,7 +332,8 @@ class InsightAgent:
                     None, 
                     lambda: self.model.generate_content(
                         analysis_prompt, 
-                        generation_config={"response_mime_type": "application/json"}
+                        generation_config={"response_mime_type": "application/json"},
+                        request_options={"timeout": 10.0}
                     )
                 )
                 text = response.text.strip()

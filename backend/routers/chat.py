@@ -90,7 +90,8 @@ async def chat_with_data(
             None,
             lambda: model.generate_content(
                 sql_prompt,
-                generation_config={"response_mime_type": "application/json"}
+                generation_config={"response_mime_type": "application/json"},
+                request_options={"timeout": 10.0}
             )
         )
         text = response.text.strip()
@@ -161,7 +162,10 @@ async def chat_with_data(
         
         ans_res = await loop.run_in_executor(
             None,
-            lambda: model.generate_content(chat_prompt)
+            lambda: model.generate_content(
+                chat_prompt,
+                request_options={"timeout": 10.0}
+            )
         )
         answer = ans_res.text.strip()
     except Exception as e:
