@@ -58,7 +58,7 @@ class InsightAgent:
         
         {schema_str}
         
-        Formulate exactly 4 logical business hypotheses to investigate to find anomalies, spikes, drops, or opportunities.
+        Formulate exactly 2 logical business hypotheses to investigate to find anomalies, spikes, drops, or opportunities.
         Focus on standard business questions: sales trends, product performance, customer retention, or cost overruns.
         
         Output the list as a JSON array matching this format:
@@ -126,9 +126,9 @@ class InsightAgent:
             })
             
             iteration = 0
-            max_iterations = 2
+            max_iterations = 1
             while iteration < max_iterations:
-                await asyncio.sleep(1.0)
+                await asyncio.sleep(0.2)
                 iteration += 1
                 yield self._event("log", {
                     "sender": "agent", 
@@ -283,7 +283,7 @@ class InsightAgent:
         cross_connections = find_cross_file_connections(schema)
         
         for conn_idx, conn in enumerate(cross_connections, 1):
-            await asyncio.sleep(1.0)
+            await asyncio.sleep(0.2)
             yield self._event("log", {
                 "sender": "agent", 
                 "message": f"🔗 Cross-File Link Found: '{conn['title']}'\n↳ Action: {conn['description']}"

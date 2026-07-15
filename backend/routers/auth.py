@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 import hashlib
 import secrets
+import asyncio
 
 from backend.db.session import get_db
 from backend.db.models import User
@@ -111,7 +112,7 @@ class ResetPasswordRequest(BaseModel):
     new_password: str
 
 @router.post("/forgot-password")
-def forgot_password(payload: ForgotPasswordRequest, db: Session = Depends(get_db)):
+async def forgot_password(payload: ForgotPasswordRequest, db: Session = Depends(get_db)):
     email = payload.email.strip().lower()
     if not email:
         raise HTTPException(status_code=400, detail="Email is required.")
@@ -131,7 +132,8 @@ def forgot_password(payload: ForgotPasswordRequest, db: Session = Depends(get_db
     }
     
     # Send email
-    res = send_otp_email(email, otp)
+    loop = asyncio.get_event_loop()
+    res = await loop.run_in_executor(None, lambda: send_otp_email(email, otp))
     
     response_data = {
         "status": "SUCCESS",

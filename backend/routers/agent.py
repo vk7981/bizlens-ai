@@ -38,12 +38,19 @@ async def run_agent_workflow(session_id: str, db_path: str):
             # Load fresh metadata inside workflow transaction
             meta = db.query(SessionMetadata).filter(SessionMetadata.session_id == session_id).first()
             if meta and meta.email:
+                loop = asyncio.get_event_loop()
                 # 1. Proactive alerts dispatch (if alerts found)
                 if final_report.get("alerts") and meta.alerts_enabled:
-                    send_alert_email(meta.email, final_report["alerts"], meta.db_name)
+                    await loop.run_in_executor(
+                        None,
+                        lambda: send_alert_email(meta.email, final_report["alerts"], meta.db_name)
+                    )
                 # 2. Complete report dispatch (if report enabled)
                 if meta.reports_enabled:
-                    send_full_report_email(meta.email, final_report, meta.db_name)
+                    await loop.run_in_executor(
+                        None,
+                        lambda: send_full_report_email(meta.email, final_report, meta.db_name)
+                    )
                     
     except Exception as e:
         print(f"Agent execution crashed: {str(e)}")
