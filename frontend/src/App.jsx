@@ -150,11 +150,25 @@ export default function App() {
     );
   }
 
+  if (screen === 'dashboard') {
+    return (
+      <Dashboard 
+        sessionId={sessionId} 
+        dbName={dbName} 
+        onBack={() => setScreen('home')} 
+        onOpenChat={() => setScreen('chat')}
+        onOpenSettings={() => setScreen('settings')}
+        t={t} 
+        userEmail={userEmail}
+      />
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#080B11] text-slate-200 flex flex-col bg-grid-pattern relative overflow-x-hidden">
+    <div className="min-h-screen bg-background text-slate-200 flex flex-col bg-grid-pattern relative overflow-x-hidden">
       {/* Background radial glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] radial-glow-indigo pointer-events-none -z-10" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] radial-glow-orange pointer-events-none -z-10" />
+      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] radial-glow-purple pointer-events-none -z-10" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] radial-glow-lavender pointer-events-none -z-10" />
 
       {/* Premium Navigation Header */}
       <header className="bg-surface-container-low/75 border-b border-outline-variant/60 sticky top-0 z-50 shadow-lg backdrop-blur-md">

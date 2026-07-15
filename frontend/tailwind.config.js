@@ -7,29 +7,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#080B11", // Sleek deep dark charcoal-black
-        surface: "#0F131E",     // Subtle card dark surface
-        "surface-container": "#151C2C",
-        "surface-container-low": "#0C0F17",
-        "surface-container-lowest": "#05060A",
-        "surface-container-high": "#1E263B",
-        "surface-container-highest": "#28334E",
-        "primary-container": "#6366F1", // Indigo
-        "on-surface-variant": "#94A3B8", // Sleek gray for descriptions
-        "outline-variant": "#1E293B",     // Borders
-        "primary-fixed-dim": "#818CF8",   // Indigo secondary
+        background: "#080614", // Deep dark purple-black
+        surface: "#0f0a21",     // Deep violet card surface
+        "surface-container": "#171033",
+        "surface-container-low": "#0b0719",
+        "surface-container-lowest": "#05030c",
+        "surface-container-high": "#22174a",
+        "surface-container-highest": "#2d1f61",
+        "primary-container": "#8b5cf6", // Purple/violet primary
+        "on-surface-variant": "#a78bfa", // Purple/slate for labels
+        "outline-variant": "#22184a",     // Dark purple border
+        "primary-fixed-dim": "#a78bfa",   // Secondary violet
         primary: "#EEF2F6",
-        secondary: "#38BDF8",
+        secondary: "#c084fc", // Lavender/Pink
         alert: {
-          DEFAULT: '#ea580c',
-          50: '#fff7ed',
-          100: '#ffedd5',
-          500: '#ea580c',
-          600: '#c2410c',
+          DEFAULT: '#ef4444',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          500: '#ef4444',
+          600: '#dc2626',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
       }
     },
   },
