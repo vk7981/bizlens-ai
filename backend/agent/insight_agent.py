@@ -77,14 +77,12 @@ class InsightAgent:
         hypotheses = []
         try:
             # Run LLM call in executor
-            loop = asyncio.get_event_loop()
-            response = await loop.run_in_executor(
-                None, 
-                lambda: self.model.generate_content(
+            response = await asyncio.wait_for(
+                self.model.generate_content_async(
                     planner_prompt, 
-                    generation_config={"response_mime_type": "application/json"},
-                    request_options={"timeout": 10.0}
-                )
+                    generation_config={"response_mime_type": "application/json"}
+                ),
+                timeout=10.0
             )
             text = response.text.strip()
             if text.startswith("```json"):
@@ -161,13 +159,12 @@ class InsightAgent:
                 """
                 
                 try:
-                    response = await loop.run_in_executor(
-                        None, 
-                        lambda: self.model.generate_content(
+                    response = await asyncio.wait_for(
+                        self.model.generate_content_async(
                             sql_prompt, 
-                            generation_config={"response_mime_type": "application/json"},
-                            request_options={"timeout": 10.0}
-                        )
+                            generation_config={"response_mime_type": "application/json"}
+                        ),
+                        timeout=10.0
                     )
                     text = response.text.strip()
                     if text.startswith("```json"):
@@ -232,13 +229,12 @@ class InsightAgent:
                 """
                 
                 try:
-                    response = await loop.run_in_executor(
-                        None, 
-                        lambda: self.model.generate_content(
+                    response = await asyncio.wait_for(
+                        self.model.generate_content_async(
                             analysis_prompt, 
-                            generation_config={"response_mime_type": "application/json"},
-                            request_options={"timeout": 10.0}
-                        )
+                            generation_config={"response_mime_type": "application/json"}
+                        ),
+                        timeout=10.0
                     )
                     text = response.text.strip()
                     if text.startswith("```json"):
@@ -328,13 +324,12 @@ class InsightAgent:
             """
             
             try:
-                response = await loop.run_in_executor(
-                    None, 
-                    lambda: self.model.generate_content(
+                response = await asyncio.wait_for(
+                    self.model.generate_content_async(
                         analysis_prompt, 
-                        generation_config={"response_mime_type": "application/json"},
-                        request_options={"timeout": 10.0}
-                    )
+                        generation_config={"response_mime_type": "application/json"}
+                    ),
+                    timeout=10.0
                 )
                 text = response.text.strip()
                 if text.startswith("```json"):
@@ -465,7 +460,7 @@ class InsightAgent:
         # Rank the raw insights
         ranked_insights = []
         if raw_insights:
-            ranked_insights = rank_insights(raw_insights)
+            ranked_insights = await rank_insights(raw_insights)
         else:
             # Fallback report if no insights found
             ranked_insights.append({

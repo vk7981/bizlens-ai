@@ -1,8 +1,9 @@
 import google.generativeai as genai
 import os
 import json
+import asyncio
 
-def rank_insights(insights: list) -> list:
+async def rank_insights(insights: list) -> list:
     """
     Ranks a list of raw insights by business/financial impact (High, Medium, Low) using Gemini.
     Adds clear plain-language explanations of WHY this matters for the business owner.
@@ -43,10 +44,12 @@ def rank_insights(insights: list) -> list:
     """
     
     try:
-        response = model.generate_content(
-            prompt,
-            generation_config={"response_mime_type": "application/json"},
-            request_options={"timeout": 10.0}
+        response = await asyncio.wait_for(
+            model.generate_content_async(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            ),
+            timeout=10.0
         )
         text = response.text.strip()
         # Clean markdown if returned

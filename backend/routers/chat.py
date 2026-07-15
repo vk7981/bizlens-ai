@@ -83,16 +83,13 @@ async def chat_with_data(
     query_result_data = None
     query_used = ""
     
-    loop = asyncio.get_event_loop()
-    
     try:
-        response = await loop.run_in_executor(
-            None,
-            lambda: model.generate_content(
+        response = await asyncio.wait_for(
+            model.generate_content_async(
                 sql_prompt,
-                generation_config={"response_mime_type": "application/json"},
-                request_options={"timeout": 10.0}
-            )
+                generation_config={"response_mime_type": "application/json"}
+            ),
+            timeout=10.0
         )
         text = response.text.strip()
         if text.startswith("```json"):
@@ -160,12 +157,9 @@ async def chat_with_data(
         User's New Question: {message_text}
         """
         
-        ans_res = await loop.run_in_executor(
-            None,
-            lambda: model.generate_content(
-                chat_prompt,
-                request_options={"timeout": 10.0}
-            )
+        ans_res = await asyncio.wait_for(
+            model.generate_content_async(chat_prompt),
+            timeout=10.0
         )
         answer = ans_res.text.strip()
     except Exception as e:
