@@ -1,6 +1,6 @@
-# BizLens AI — Smart Business Intelligence Assistant
+# VantageBI — Smart Business Intelligence Assistant
 
-BizLens AI is a friendly, multilingual business intelligence dashboard built for non-technical small business owners in India. It accepts multiple Excel/CSV files, automatically discovers cross-file patterns, triggers proactive SMTP email alerts for critical risks, and lets owners ask questions about their data in **English, Tamil (தமிழ்), or Hindi (हिंदी)** without using technical SQL terms.
+VantageBI is a friendly, multilingual business intelligence dashboard built for non-technical small business owners in India. It accepts multiple Excel/CSV files, automatically discovers cross-file patterns, triggers proactive SMTP email alerts for critical risks, and lets owners ask questions about their data in **English, Tamil (தமிழ்), or Hindi (हिंदी)** without using technical SQL terms.
 
 ---
 
@@ -22,7 +22,7 @@ BizLens AI is a friendly, multilingual business intelligence dashboard built for
 
 ## 📂 Project Structure
 ```
-bizlens-ai/
+vantage-bi/
 ├── backend/
 │   ├── main.py
 │   ├── agent/                 # Core analysis loops and ranking systems
@@ -47,7 +47,7 @@ To receive email alerts, configure a Gmail App Password:
 1. Go to your **Google Account Settings** -> **Security**.
 2. Enable **2-Step Verification**.
 3. Search for **App passwords** (or go to [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)).
-4. Create an app password called `BizLens` and copy the 16-character code.
+4. Create an app password called `VantageBI` and copy the 16-character code.
 5. Add it to `backend/.env` under `GMAIL_APP_PASSWORD`.
 
 ### 2. Backend Setup
@@ -58,7 +58,7 @@ To receive email alerts, configure a Gmail App Password:
 2. Create your `.env` file and populate it (our tool has already configured the Gemini key for you):
    ```env
    GEMINI_API_KEY=your_gemini_api_key
-   DATABASE_URL=sqlite:///./bizlens.db
+   DATABASE_URL=sqlite:///./vantage.db
    UPLOAD_DIR=./uploads
    GMAIL_SENDER=your_email@gmail.com
    GMAIL_APP_PASSWORD=your_16_character_app_password
