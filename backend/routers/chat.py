@@ -168,7 +168,30 @@ async def chat_with_data(
         print("Chat response formulation failed:", str(e))
         err_msg = str(e).lower()
         if "quota" in err_msg or "exhausted" in err_msg or "429" in err_msg:
-            answer = "I'm sorry, but our AI Model quota has been temporarily exceeded for the day (Google Free Tier 1,500 requests/day limit). Please wait a moment or configure a billing account in AI Studio!"
+            # Check for common greetings
+            greet_keywords = ["hi", "hello", "hey", "hola", "namaste", "வணக்கம்", "नमस्ते", "ஹாய்", "हाय"]
+            cleaned_msg = message_text.lower().replace("?", "").strip()
+            is_greeting = any(k in cleaned_msg.split() for k in greet_keywords) or cleaned_msg in greet_keywords
+            
+            if is_greeting:
+                greet_replies = {
+                    "en": "Hello! The Google Gemini AI quota has been temporarily exceeded, but I can still assist you with raw data metrics. Ask me about your columns or data tables!",
+                    "ta": "வணக்கம்! கூகிள் ஜெமினி AI வரம்பு தற்காலிகமாக முடிந்துவிட்டது, ஆனால் நான் இன்னும் உங்களுக்கு உதவ முடியும். உங்கள் தரவு அட்டவணைகளைப் பற்றி கேளுங்கள்!",
+                    "hi": "नमस्ते! Google जेमिनी AI कोटा अस्थायी रूप से समाप्त हो गया है, लेकिन मैं अभी भी आपकी सहायता कर सकता हूँ। अपनी डेटा तालिकाओं के बारे में पूछें!"
+                }
+                answer = greet_replies.get(detected_lang, greet_replies["en"])
+            else:
+                schema_info = []
+                for tbl_name, cols in schema.items():
+                    schema_info.append(f"- {tbl_name} ({', '.join(cols)})")
+                schema_str = "\n".join(schema_info)
+                
+                answer_replies = {
+                    "en": f"I'm sorry, but our AI Model quota has been temporarily exceeded for the day (Google Free Tier 1,500 requests/day). However, your sandboxed database is active. Here is your database structure:\n\n{schema_str}\n\nYou can query this data directly using the 'Visualizations' panel or wait for the quota reset!",
+                    "ta": f"வருந்துகிறோம், எங்களது AI மாதிரி வரம்பு தற்காலிகமாக முடிந்துவிட்டது. ஆனால் உங்கள் தரவுத்தளம் செயலில் உள்ளது. இதோ அதன் கட்டமைப்பு:\n\n{schema_str}\n\n'Visualizations' பேனல் மூலம் நீங்கள் நேரடியாக இந்த தரவை வினவலாம்!",
+                    "hi": f"क्षमा करें, हमारा AI मॉडल कोटा अस्थायी रूप से समाप्त हो गया है। लेकिन आपका डेटाबेस सक्रिय है। यहाँ आपकी डेटा संरचना है:\n\n{schema_str}\n\nआप 'Visualizations' पैनल का उपयोग करके सीधे इस डेटा को क्वेरी कर सकते हैं!"
+                }
+                answer = answer_replies.get(detected_lang, answer_replies["en"])
         elif "not found" in err_msg or "404" in err_msg:
             answer = "I'm sorry, but the selected model is not available or is deprecated. Please check your project settings."
         else:
