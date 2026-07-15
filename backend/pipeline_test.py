@@ -11,7 +11,7 @@ def run_test_pipeline():
     print("====================================================")
 
     # 1. Prepare files
-    sample_dir = r"C:\Users\vaish\.gemini\antigravity\scratch\bizlens-ai\sample_data"
+    sample_dir = r"D:\Projects\bizlens-ai\sample_data"
     files_to_upload = ['sales_jan_march.csv', 'expenses_jan_march.csv', 'inventory.csv', 'customers.csv']
     
     upload_payload = []

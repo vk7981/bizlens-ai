@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 import google.generativeai as genai
 import os
 import json
+import asyncio
 from backend.db.session import get_db
 from backend.db.models import SessionMetadata, ChatMessage, InsightReport, Alert
 from backend.services.language_service import detect_language, get_multilingual_chat_prompt
@@ -62,7 +63,7 @@ async def chat_with_data(
     if not api_key:
         raise HTTPException(status_code=500, detail="Gemini key not configured.")
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     
     sql_prompt = f"""
     You are a SQL translator. Translate this business owner question into a single read-only SQLite SELECT query.
@@ -164,13 +165,18 @@ async def chat_with_data(
         answer = ans_res.text.strip()
     except Exception as e:
         print("Chat response formulation failed:", str(e))
-        # Simple fallback message
-        fallbacks = {
-            "en": "I experienced a connection issue. Can you please repeat that?",
-            "ta": "இணைப்புப் பிரச்சினை ஏற்பட்டது. தயவுசெய்து மீண்டும் கேட்கிறீர்களா?",
-            "hi": "कनेक्शन की समस्या हुई। क्या आप कृपया इसे दोहरा सकते हैं?"
-        }
-        answer = fallbacks.get(detected_lang, fallbacks["en"])
+        err_msg = str(e).lower()
+        if "quota" in err_msg or "exhausted" in err_msg or "429" in err_msg:
+            answer = "I'm sorry, but our AI Model quota has been temporarily exceeded for the day (Google Free Tier 1,500 requests/day limit). Please wait a moment or configure a billing account in AI Studio!"
+        elif "not found" in err_msg or "404" in err_msg:
+            answer = "I'm sorry, but the selected model is not available or is deprecated. Please check your project settings."
+        else:
+            fallbacks = {
+                "en": "I experienced a connection issue. Can you please repeat that?",
+                "ta": "இணைப்புப் பிரச்சினை ஏற்பட்டது. தயவுசெய்து மீண்டும் கேட்கிறீர்களா?",
+                "hi": "कनेक्शन की समस्या हुई। क्या आप कृपया इसे दोहरा सकते हैं?"
+            }
+            answer = fallbacks.get(detected_lang, fallbacks["en"])
         
     # Save assistant message to history
     assistant_msg = ChatMessage(

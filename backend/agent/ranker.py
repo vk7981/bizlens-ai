@@ -16,7 +16,7 @@ async def rank_insights(insights: list) -> list:
         raise ValueError("Missing GEMINI_API_KEY environment variable.")
         
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     
     prompt = f"""
     You are a Chief Operations Officer (COO) and Lead Business Intelligence Analyst.
@@ -49,7 +49,7 @@ async def rank_insights(insights: list) -> list:
                 prompt,
                 generation_config={"response_mime_type": "application/json"}
             ),
-            timeout=10.0
+            timeout=4.0
         )
         text = response.text.strip()
         # Clean markdown if returned
