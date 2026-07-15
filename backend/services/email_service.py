@@ -36,7 +36,7 @@ def get_or_create_ethereal_account():
     try:
         res = requests.post(
             'https://api.nodemailer.com/user', 
-            json={'requestor': 'Kestrel AI', 'version': '1.0.0'},
+            json={'requestor': 'VantageBI', 'version': '1.0.0'},
             timeout=10
         )
         if res.status_code == 200:
@@ -101,7 +101,7 @@ def send_alert_email(recipient_email: str, alerts: list, db_name: str) -> dict:
     <body style="font-family: Arial, sans-serif; color: #334155; max-width: 600px; margin: 0 auto; padding: 20px;">
         <div style="background-color: #ea580c; color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
             <h1 style="margin: 0; font-size: 20px;">⚠️ Proactive Business Alert</h1>
-            <p style="margin: 5px 0 0 0; font-size: 13px; opacity: 0.9;">Kestrel AI detected critical risks in your files</p>
+            <p style="margin: 5px 0 0 0; font-size: 13px; opacity: 0.9;">VantageBI detected critical risks in your files</p>
         </div>
         <div style="border: 1px solid #e2e8f0; border-top: none; padding: 25px; border-radius: 0 0 8px 8px;">
             <p>Dear Business Owner,</p>
@@ -109,17 +109,17 @@ def send_alert_email(recipient_email: str, alerts: list, db_name: str) -> dict:
             
             {alerts_html}
             
-            <p style="margin-top: 25px;">Please log in to your Kestrel dashboard to review the full details and run follow-up investigations.</p>
+            <p style="margin-top: 25px;">Please log in to your VantageBI dashboard to review the full details and run follow-up investigations.</p>
         </div>
         <div style="text-align: center; font-size: 11px; color: #94a3b8; margin-top: 20px;">
-            This email was sent automatically by Kestrel AI based on your analysis alert preferences.
+            This email was sent automatically by VantageBI based on your analysis alert preferences.
         </div>
     </body>
     </html>
     """
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"⚠️ Kestrel Alert — Action Required for {db_name}"
+    msg["Subject"] = f"⚠️ VantageBI Alert — Action Required for {db_name}"
     msg["From"] = sender
     msg["To"] = recipient_email
     msg.attach(MIMEText(body_html, "html"))
@@ -176,7 +176,7 @@ def send_full_report_email(recipient_email: str, report_data: dict, db_name: str
     report_html = generate_report_html(report_data, db_name)
 
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Kestrel AI — Business Insight Report for {db_name}"
+    msg["Subject"] = f"VantageBI — Business Insight Report for {db_name}"
     msg["From"] = sender
     msg["To"] = recipient_email
     msg.attach(MIMEText(report_html, "html"))

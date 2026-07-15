@@ -107,7 +107,7 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
             </div>
             <div className="space-y-1.5 flex-1">
               <h4 className="font-extrabold text-slate-100 text-sm tracking-tight flex items-center gap-1.5">
-                <span>📬 Kestrel AI Mail Sandbox Active!</span>
+                <span>📬 VantageBI Mail Sandbox Active!</span>
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed max-w-2xl">
                 Your email report has been successfully dispatched and captured inside our sandbox. You do not need to configure SMTP settings! View your fully formatted email report using the credentials below:

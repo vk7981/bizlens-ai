@@ -7,7 +7,7 @@ API_BASE = "http://127.0.0.1:8000"
 
 def run_test_pipeline():
     print("====================================================")
-    print("[INIT] KESTREL AI: AUTOMATED TEST RUN INITIALIZED")
+    print("[INIT] VANTAGEBI: AUTOMATED TEST RUN INITIALIZED")
     print("====================================================")
 
     # 1. Prepare files

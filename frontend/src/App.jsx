@@ -12,8 +12,8 @@ import { uploadFiles, runAgent } from './api/client';
 import { Sparkles, HelpCircle, ShieldAlert } from 'lucide-react';
 
 export default function App() {
-  const [lang, setLang] = useState(() => localStorage.getItem('kestrel_lang') || 'en');
-  const [userEmail, setUserEmail] = useState(() => localStorage.getItem('kestrel_user_email') || '');
+  const [lang, setLang] = useState(() => localStorage.getItem('vantage_lang') || 'en');
+  const [userEmail, setUserEmail] = useState(() => localStorage.getItem('vantage_user_email') || '');
   const [authScreen, setAuthScreen] = useState('login');
   const [screen, setScreen] = useState('home'); // home, agent, dashboard, chat, settings
   const [sessionId, setSessionId] = useState(null);
@@ -27,7 +27,7 @@ export default function App() {
   const [uploadingFiles, setUploadingFiles] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('kestrel_lang', lang);
+    localStorage.setItem('vantage_lang', lang);
   }, [lang]);
 
   // Translation helper function
@@ -131,7 +131,7 @@ export default function App() {
         <Register 
           onRegisterSuccess={(email) => {
             setUserEmail(email);
-            localStorage.setItem('kestrel_user_email', email);
+            localStorage.setItem('vantage_user_email', email);
           }}
           onToggleLogin={() => setAuthScreen('login')}
         />
@@ -141,7 +141,7 @@ export default function App() {
       <Login 
         onLoginSuccess={(email) => {
           setUserEmail(email);
-          localStorage.setItem('kestrel_user_email', email);
+          localStorage.setItem('vantage_user_email', email);
         }} 
         onToggleRegister={() => setAuthScreen('register')}
       />
@@ -163,7 +163,7 @@ export default function App() {
           >
             <img 
               src="/logo.png" 
-              alt="Kestrel AI Logo" 
+              alt="VantageBI Logo" 
               className="h-14 w-auto object-contain group-hover:scale-[1.02] transition-all"
             />
           </div>
@@ -180,7 +180,7 @@ export default function App() {
               <button
                 onClick={() => {
                   setUserEmail('');
-                  localStorage.removeItem('kestrel_user_email');
+                  localStorage.removeItem('vantage_user_email');
                   setScreen('home');
                 }}
                 className="px-2.5 py-1.5 text-[10px] font-bold text-red-400 bg-red-950/20 hover:bg-red-950/40 border border-red-900/35 rounded-lg hover:border-red-900/50 transition-all cursor-pointer select-none"
@@ -261,7 +261,7 @@ export default function App() {
       {/* Approachable and clean Footer */}
       <footer className="bg-surface-container-low/40 border-t border-outline-variant/60 py-6 text-center text-xs text-slate-500">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Kestrel AI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} VantageBI. All rights reserved.</p>
           <div className="flex items-center gap-1.5 text-[10px] text-emerald-500 font-bold uppercase">
             <ShieldAlert className="w-4 h-4 text-emerald-500" />
             <span>Select-Only Sandbox Active</span>

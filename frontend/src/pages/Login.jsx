@@ -40,7 +40,7 @@ export default function Login({ onLoginSuccess, onToggleRegister }) {
           <div className="flex flex-col items-center text-center mb-8">
             <img 
               src="/logo.png" 
-              alt="Kestrel AI Logo" 
+              alt="VantageBI Logo" 
               className="h-28 w-auto object-contain select-none"
             />
           </div>

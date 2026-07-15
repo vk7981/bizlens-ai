@@ -1,6 +1,6 @@
 export const translations = {
   en: {
-    title: "Kestrel AI",
+    title: "VantageBI",
     subtitle: "Understand your business. No technical skills needed.",
     subline: "Upload your Excel or CSV files — our AI finds what's working and what's not.",
     uploadTitle: "Upload your business files",

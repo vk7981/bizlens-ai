@@ -47,7 +47,7 @@ export default function Register({ onRegisterSuccess, onToggleLogin }) {
           <div className="flex flex-col items-center text-center mb-6">
             <img 
               src="/logo.png" 
-              alt="Kestrel AI Logo" 
+              alt="VantageBI Logo" 
               className="h-28 w-auto object-contain select-none"
             />
           </div>

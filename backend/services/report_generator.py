@@ -17,7 +17,7 @@ def generate_report_html(report_data: dict, db_name: str) -> str:
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kestrel AI Business Analysis Report</title>
+        <title>VantageBI Business Analysis Report</title>
         <style>
             body {{
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -178,7 +178,7 @@ def generate_report_html(report_data: dict, db_name: str) -> str:
     <body>
         <div class="container">
             <div class="header">
-                <h1>Kestrel AI Analysis Report</h1>
+                <h1>VantageBI Analysis Report</h1>
                 <p>Intelligence summary for {db_name}</p>
             </div>
             <div class="content">
@@ -242,7 +242,7 @@ def generate_report_html(report_data: dict, db_name: str) -> str:
                 ''' for i in insights])}
             </div>
             <div class="footer">
-                Report generated on {date_str} by Kestrel AI.<br>
+                Report generated on {date_str} by VantageBI.<br>
                 This analysis is fully automated using select-only database sandboxing.
             </div>
         </div>
