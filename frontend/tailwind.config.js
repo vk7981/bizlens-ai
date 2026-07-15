@@ -7,19 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#080614", // Deep dark purple-black
-        surface: "#0f0a21",     // Deep violet card surface
-        "surface-container": "#171033",
-        "surface-container-low": "#0b0719",
-        "surface-container-lowest": "#05030c",
-        "surface-container-high": "#22174a",
-        "surface-container-highest": "#2d1f61",
-        "primary-container": "#8b5cf6", // Purple/violet primary
-        "on-surface-variant": "#a78bfa", // Purple/slate for labels
-        "outline-variant": "#22184a",     // Dark purple border
-        "primary-fixed-dim": "#a78bfa",   // Secondary violet
-        primary: "#EEF2F6",
-        secondary: "#c084fc", // Lavender/Pink
+        background: "#0B0B17", // Vantage Purple Main Background
+        surface: "#17172A",     // Cards / Sidebar / Surface
+        "surface-container": "#21213b",
+        "surface-container-low": "#131322",
+        "surface-container-lowest": "#090912",
+        "surface-container-high": "#2c2c4d",
+        "surface-container-highest": "#3b3b66",
+        "primary-container": "#7C3AED", // Primary Color
+        "on-surface-variant": "#a78bfa",
+        "outline-variant": "#2d2d4f",     // Dark borders
+        "primary-fixed-dim": "#a78bfa",
+        primary: "#F5F3FF", // Primary Text Color
+        secondary: "#06B6D4", // Accent / Highlight Color
         alert: {
           DEFAULT: '#ef4444',
           50: '#fef2f2',

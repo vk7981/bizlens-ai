@@ -5,17 +5,17 @@
 @layer base {
   body {
     @apply text-slate-200 antialiased font-sans;
-    background-color: #080614;
-    color: #EEF2F6;
+    background-color: #0B0B17;
+    color: #F5F3FF;
   }
 }
 
 /* Premium 3D Scroll and Radial Glow Animations */
 .glass-panel {
-  background: rgba(15, 10, 33, 0.65);
+  background: rgba(23, 23, 42, 0.65);
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-top: 1px solid rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(124, 58, 237, 0.15);
 }
 
 .perspective-1000 {
@@ -26,17 +26,17 @@
 .bg-grid-pattern {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(139, 92, 246, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(139, 92, 246, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(124, 58, 237, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 58, 237, 0.02) 1px, transparent 1px);
 }
 
 /* Ambient Radial Glows */
 .radial-glow-purple {
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
 }
 
-.radial-glow-lavender {
-  background: radial-gradient(circle, rgba(192, 132, 252, 0.08) 0%, transparent 70%);
+.radial-glow-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
 }
 
 /* 3D Parallax Scroll Shift */
@@ -52,13 +52,13 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #080614;
+  background: #0B0B17;
 }
 ::-webkit-scrollbar-thumb {
-  background: #171033;
+  background: #17172A;
   border-radius: 4px;
-  border: 2px solid #080614;
+  border: 2px solid #0B0B17;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
+  background: #7C3AED;
 }

@@ -119,12 +119,10 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
           
           {/* Logo brand */}
           <div className="flex items-center gap-3 pb-2 border-b border-outline-variant/60">
-            <div className="w-9 h-9 bg-gradient-to-tr from-violet-600 to-indigo-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-violet-500/25">
-              <Cpu className="w-5 h-5 animate-pulse" />
-            </div>
+            <img src="/logo.png" alt="VantageBI Logo" className="w-9 h-9 object-contain rounded-xl shadow-md" />
             <div>
               <span className="font-extrabold text-slate-100 text-base tracking-tight block">VantageBI</span>
-              <span className="text-[9px] uppercase tracking-widest font-bold text-violet-400">Agentic BI Hub</span>
+              <span className="text-[9px] uppercase tracking-widest font-bold text-secondary">Agentic BI Hub</span>
             </div>
           </div>
 
@@ -157,21 +155,8 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
           </nav>
         </div>
 
-        {/* Lower block card: "Go Pro / Exit Session" */}
+        {/* Lower block card: Exit Session */}
         <div className="space-y-4 mt-8">
-          
-          {/* Synaptix-style Go Pro card */}
-          <div className="bg-gradient-to-b from-surface-container to-surface border border-violet-900/35 rounded-2xl p-4 text-center relative overflow-hidden shadow-lg">
-            <div className="absolute -top-12 -right-12 w-24 h-24 bg-violet-600/10 rounded-full blur-xl" />
-            <h5 className="font-extrabold text-slate-200 text-xs tracking-tight">VantageBI Pro</h5>
-            <p className="text-[9px] text-slate-400 mt-1 leading-relaxed">
-              Unlock multi-dimensional data models and real-time report triggers.
-            </p>
-            <button className="w-full mt-3 py-2 bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-750 hover:to-indigo-650 text-[10px] font-extrabold text-white rounded-lg shadow-sm cursor-pointer">
-              Upgrade to Pro
-            </button>
-          </div>
-
           {/* Exit / Return home */}
           <button
             onClick={onBack}
