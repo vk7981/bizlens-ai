@@ -118,11 +118,11 @@ export default function Dashboard({ sessionId, dbName, onBack, onOpenChat, onOpe
         <div className="space-y-8">
           
           {/* Logo brand */}
-          <div className="flex items-center gap-3 pb-2 border-b border-outline-variant/60">
-            <img src="/logo.png" alt="VantageBI Logo" className="w-9 h-9 object-contain rounded-xl shadow-md" />
+          <div className="flex flex-col items-center text-center pb-4 border-b border-outline-variant/60 gap-2.5">
+            <img src="/logo.png" alt="VantageBI Logo" className="w-18 h-18 object-contain rounded-xl shadow-lg border border-outline-variant/40" />
             <div>
-              <span className="font-extrabold text-slate-100 text-base tracking-tight block">VantageBI</span>
-              <span className="text-[9px] uppercase tracking-widest font-bold text-secondary">Agentic BI Hub</span>
+              <span className="font-extrabold text-slate-100 text-lg tracking-tight block">VantageBI</span>
+              <span className="text-[10px] uppercase tracking-widest font-bold text-secondary">Agentic BI Hub</span>
             </div>
           </div>
 

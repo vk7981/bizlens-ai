@@ -124,10 +124,10 @@ export default function Login({ onLoginSuccess, onToggleRegister }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#080B11] text-slate-200 flex flex-col items-center justify-center bg-grid-pattern relative overflow-hidden px-4">
+    <div className="min-h-screen bg-background text-slate-200 flex flex-col items-center justify-center bg-grid-pattern relative overflow-hidden px-4">
       {/* Background radial glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] radial-glow-indigo pointer-events-none -z-10" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] radial-glow-orange pointer-events-none -z-10" />
+      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] radial-glow-purple pointer-events-none -z-10" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] radial-glow-cyan pointer-events-none -z-10" />
 
       <div className="w-full max-w-md animate-fade-in">
         <Tilt3DCard className="bg-surface border border-outline-variant/65 rounded-3xl p-6 md:p-8 shadow-2xl glass-panel relative overflow-hidden">
@@ -137,7 +137,7 @@ export default function Login({ onLoginSuccess, onToggleRegister }) {
             <img 
               src="/logo.png" 
               alt="VantageBI Logo" 
-              className="h-24 w-auto object-contain select-none"
+              className="h-28 w-auto object-contain select-none shadow-xl border border-outline-variant/40 rounded-2xl p-2 bg-surface-container/20"
             />
           </div>
 
